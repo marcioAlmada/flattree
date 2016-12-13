@@ -2,6 +2,14 @@
     <img src="https://dl.dropboxusercontent.com/u/49549530/flattree/flaTTree.png" title="Flat Tree">
 </h1>
 
+[![Build Status](https://travis-ci.org/marcioAlmada/flattree.svg?branch=master)](https://travis-ci.org/marcioAlmada/flattree)
+[![Coverage Status](https://coveralls.io/repos/marcioAlmada/flattree/badge.svg?branch=master)](https://coveralls.io/r/marcioAlmada/flattree?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/marc/flattree/v/stable.png)](https://packagist.org/packages/marc/flattree)
+[![License](https://poser.pugx.org/marc/flattree/license.png)](https://packagist.org/packages/marc/flattree)
+<!-- [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/marcioAlmada/flattree/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/marcioAlmada/flattree/?branch=master) -->
+<!-- [![Total Downloads](https://poser.pugx.org/marc/flattree/downloads.png)](https://packagist.org/packages/marc/flattree) -->
+<!-- [![Reference Status](https://www.versioneye.com/php/marc:flattree/reference_badge.svg?style=flat)](https://www.versioneye.com/php/marc:flattree/references) -->
+
 ## Set Up
 
 ```bash
