@@ -1,0 +1,26 @@
+{
+    "name": "marc/flattree",
+    "description": "Adjacent list tree builder",
+    "license": "MIT",
+    "keywords": [
+        "tree"
+    ],
+    "authors": [
+        {
+            "name": "Márcio Almada",
+            "email": "marcio3w@gmail.com",
+            "homepage": "https://github.com/marcioAlmada"
+        }
+    ],
+    "require": {
+        "php": "7.*"
+    },
+    "autoload": {
+        "files": [
+            "functions.php"
+        ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.2"
+    }
+}
