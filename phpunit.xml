@@ -15,12 +15,6 @@
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory>src/</directory>
-        </whitelist>
-    </filter>
-
     <logging>
         <log type="tap" target="build/logs/report.tap"/>
         <log type="junit" target="build/logs/report.junit.xml"/>
