@@ -15,6 +15,12 @@
         </testsuite>
     </testsuites>
 
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <file>functions.php</file>
+        </whitelist>
+    </filter>
+
     <logging>
         <log type="tap" target="build/logs/report.tap"/>
         <log type="junit" target="build/logs/report.junit.xml"/>
