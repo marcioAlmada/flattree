@@ -42,7 +42,7 @@ $tree = unfold($associative_data, 'parent_id=employee_id');
 
 echo debug($tree, "{job_title}: {first_name}");
 ```
-Outputs:
+Debug output:
 ```
 ├─ <null>: <null>
 │  ├─ Managing Director: Bill
@@ -74,7 +74,7 @@ $tree = unfold($data, ['class', 'animal']);
 
 echo debug($tree, ['{:level}', '{:level}', '{breed}']);
 ```
-Outputs:
+Debug output:
 ```
 ├─ mammal
 │  ├─ dog
@@ -95,7 +95,7 @@ $tree = unfold($associative_data, ['class', 'animal', 'size']);
 
 echo debug($tree, ['{:level}', '{:level}', '{:level}', '{breed}']);
 ```
-Outputs:
+Debug output:
 ```
 ├─ mammal
 │  ├─ dog
@@ -110,7 +110,11 @@ Outputs:
 
 ```
 
-> Reference http://www.ibase.ru/files/articles/programming/dbmstrees/sqltrees.html
+## Final Notes
+
+Notice `marc\flattree\debug` function is there for debug purposes *only*, you must not depend on its output.
+
+Reference http://www.ibase.ru/files/articles/programming/dbmstrees/sqltrees.html
 
 ## Copyright
 
