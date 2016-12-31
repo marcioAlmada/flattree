@@ -1,15 +1,25 @@
 <?php declare(strict_types=1);
 
+use InvalidArgumentException;
+
 namespace marc\flattree;
 
-function unfold(array $data, array $levels) : array {
+function unfold(array $data, $schema) : array {
+
+    if (is_array($schema)) return unfold_adjacent($data, $schema);
+
+    if (is_string($schema)) return unfold_adjacent_recursive($data, $schema);
+
+    throw new InvalidArgumentException('Invalid flat tree schema. Schema should be array or string');
+}
+
+function unfold_adjacent(array $data, array $levels) : array {
 
     (function (string ...$_) {})(...$levels); // levels must contain only strings
 
     if ((count($data) === 0) || null === ($level = array_shift($levels))) return $data;
 
     $tree = [];
-
     $uniqueValues = array_unique(array_column($data, $level));
     foreach ($uniqueValues as $filter) {
         $filtered = array_filter($data, function ($r) use ($filter, $level) { return $r[$level] === $filter; });
@@ -19,7 +29,15 @@ function unfold(array $data, array $levels) : array {
     return $tree;
 }
 
-function unfold_recursive(array $data, string $index, string $relation) : array {
+function unfold_adjacent_recursive(array $data, string $schema) : array {
+
+    $schema = explode('=', $schema);
+
+    if (2 !== count($schema))
+        throw new InvalidArgumentException(
+            "Invalid recursive flat tree schema. Schema should be string.\nEx: 'unique_id=related_id' or 'name=parent_name'.");
+
+    list($index, $relation) = $schema;
 
     if ((count($data) === 0)) return $data;
 

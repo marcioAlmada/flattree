@@ -36,9 +36,9 @@ Consider you have the following adjacent list as data representing some recursiv
 To build a tree based on the given dataset, where `parent_id=employee_id`:
 
 ```php
-use marc\flatrree\{unfold_recursive, debug};
+use marc\flatrree\{unfold, debug};
 
-$tree = unfold_recursive($associative_data, 'parent_id', 'employee_id');
+$tree = unfold($associative_data, 'parent_id=employee_id');
 
 echo debug($tree, "{job_title}: {first_name}");
 ```

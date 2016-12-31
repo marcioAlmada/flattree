@@ -212,7 +212,7 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $tree = unfold_recursive($data, 'boss', 'name');
+        $tree = unfold($data, 'boss=name');
 
         $this->assertTreeDump(
             "
@@ -327,7 +327,7 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $tree = unfold_recursive($data, 'parent_id', 'employee_id');
+        $tree = unfold($data, 'parent_id=employee_id');
 
         $this->assertTreeDump(
             "
