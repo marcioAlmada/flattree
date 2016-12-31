@@ -21,9 +21,9 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(
             [
               'mammal' => [
-                '>' => [
+                CONTAINS => [
                   'dog' => [
-                    '>' => [
+                    CONTAINS => [
                       [
                         'id' => 1,
                         'class' => 'mammal',
@@ -48,7 +48,7 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
                     ],
                   ],
                   'cat' => [
-                    '>' => [
+                    CONTAINS => [
                       [
                         'id' => 4,
                         'class' => 'mammal',
@@ -84,11 +84,11 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(
             [
               'mammal' => [
-                '>' => [
+                CONTAINS => [
                   'dog' => [
-                    '>' => [
+                    CONTAINS => [
                       'big' => [
-                        '>' => [
+                        CONTAINS => [
                           [
                             'id' => 1,
                             'class' => 'mammal',
@@ -99,7 +99,7 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
                         ],
                       ],
                       'small' => [
-                        '>' => [
+                        CONTAINS => [
                           [
                             'id' => 2,
                             'class' => 'mammal',
@@ -119,9 +119,9 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
                     ],
                   ],
                   'cat' => [
-                    '>' => [
+                    CONTAINS => [
                       'small' => [
-                        '>' => [
+                        CONTAINS => [
                           [
                             'id' => 4,
                             'class' => 'mammal',
@@ -233,14 +233,14 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(
             [
               '' => [
-                '>' => [
+                CONTAINS => [
                   'Anthony' => [
                     'name' => 'Anthony',
                     'boss' => NULL,
                     'salary' => '21,000.00',
                     'profession' => 'Executive',
                     'sex' => 'male',
-                    '>' => [
+                    CONTAINS => [
                       'Billy' => [
                         'name' => 'Billy',
                         'boss' => 'Anthony',
@@ -256,7 +256,7 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
                     'salary' => '20,000.00',
                     'profession' => 'Executive',
                     'sex' => 'female',
-                    '>' => [
+                    CONTAINS => [
                       'Bernardo' => [
                         'name' => 'Bernardo',
                         'boss' => 'Mary',
@@ -270,7 +270,7 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
                         'salary' => '16,000.00',
                         'profession' => 'Engineer',
                         'sex' => 'male',
-                        '>' => [
+                        CONTAINS => [
                           'Leila' => [
                             'name' => 'Leila',
                             'boss' => 'Chuck',
@@ -291,7 +291,7 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
                             'salary' => '11,000.00',
                             'profession' => 'Engineer',
                             'sex' => 'male',
-                            '>' => [
+                            CONTAINS => [
                               'Fred' => [
                                 'name' => 'Fred',
                                 'boss' => 'Eddie',
@@ -355,25 +355,25 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
             │  │  │  └─ Jrn Developer: Tim
             │  │  └─ Assistant: James
             ",
-            debug($tree[null]['>'], "{job_title}: {first_name}")
+            debug($tree[null][CONTAINS], "{job_title}: {first_name}")
         );
 
         $this->assertSame(
             [
               '' => [
-                '>' => [
+                CONTAINS => [
                   1 => [
                     'employee_id' => 1,
                     'parent_id' => NULL,
                     'job_title' => 'Managing Director',
                     'first_name' => 'Bill',
-                    '>' => [
+                    CONTAINS => [
                       2 => [
                         'employee_id' => 2,
                         'parent_id' => 1,
                         'job_title' => 'Customer Services',
                         'first_name' => 'Angela',
-                        '>' => [
+                        CONTAINS => [
                           4 => [
                             'employee_id' => 4,
                             'parent_id' => 2,
@@ -393,13 +393,13 @@ class UnfoldTest extends \PHPUnit_Framework_TestCase
                         'parent_id' => 1,
                         'job_title' => 'Development Manager',
                         'first_name' => 'Ben',
-                        '>' => [
+                        CONTAINS => [
                           6 => [
                             'employee_id' => 6,
                             'parent_id' => 3,
                             'job_title' => 'Snr Developer',
                             'first_name' => 'Kerry',
-                            '>' => [
+                            CONTAINS => [
                               8 => [
                                 'employee_id' => 8,
                                 'parent_id' => 6,

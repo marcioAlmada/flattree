@@ -4,6 +4,8 @@ use InvalidArgumentException;
 
 namespace marc\flattree;
 
+const CONTAINS = '>';
+
 function unfold(array $data, $schema) : array {
 
     if (is_array($schema)) return unfold_adjacent($data, $schema);
@@ -23,7 +25,7 @@ function unfold_adjacent(array $data, array $levels) : array {
     $uniqueValues = array_unique(array_column($data, $level));
     foreach ($uniqueValues as $filter) {
         $filtered = array_filter($data, function ($r) use ($filter, $level) { return $r[$level] === $filter; });
-        $tree[$filter]['>'] = array_merge($tree[$filter]['>'] ?? [], (__FUNCTION__)($filtered, $levels));
+        $tree[$filter][CONTAINS] = array_merge($tree[$filter][CONTAINS] ?? [], (__FUNCTION__)($filtered, $levels));
     }
 
     return $tree;
@@ -45,7 +47,7 @@ function unfold_adjacent_recursive(array $data, string $schema) : array {
 
     foreach ($data as $item) {
          $tree[$item[$relation]] = array_merge($tree[$item[$relation]] ?? [], $item);
-         $tree[$item[$index]]['>'][$item[$relation]] = &$tree[$item[$relation]];
+         $tree[$item[$index]][CONTAINS][$item[$relation]] = &$tree[$item[$relation]];
     }
 
     // Nodes with 0 reference count are root and will be kept. Nodes with higher
@@ -75,9 +77,9 @@ function debug(array $tree, $template, int $ident = 0) : string {
     $buffer = '';
     foreach ($tree as $level => $subtree) {
         $subtree[':level'] = $level;
-        if (isset($subtree['>'])) {
+        if (isset($subtree[CONTAINS])) {
             $buffer .=  str_repeat('│  ', $ident) . '├─ ' . $view($subtree) . "\n";
-            $buffer .= (__FUNCTION__)($subtree['>'], $template, $ident+1);
+            $buffer .= (__FUNCTION__)($subtree[CONTAINS], $template, $ident+1);
         } else {
             $buffer .= str_repeat('│  ', $ident) . '└─ ' . $view($subtree) . "\n";
         }
