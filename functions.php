@@ -1,7 +1,5 @@
 <?php declare(strict_types=1);
 
-use InvalidArgumentException;
-
 namespace marc\flattree;
 
 const CONTAINS = '>';
@@ -12,7 +10,7 @@ function unfold(array $data, $schema) : array {
 
     if (is_string($schema)) return unfold_adjacent_recursive($data, $schema);
 
-    throw new InvalidArgumentException('Invalid flat tree schema. Schema should be array or string');
+    throw new \InvalidArgumentException('Invalid flat tree schema. Schema should be array or string');
 }
 
 function unfold_adjacent(array $data, array $levels) : array {
@@ -24,7 +22,14 @@ function unfold_adjacent(array $data, array $levels) : array {
     $tree = [];
     $uniqueValues = array_unique(array_column($data, $level));
     foreach ($uniqueValues as $filter) {
-        $filtered = array_filter($data, function ($r) use ($filter, $level) { return $r[$level] === $filter; });
+        $filtered = array_filter($data, function ($r) use ($filter, $level) {
+            if (is_array($r))
+                return $r[$level] === $filter;
+            else if (is_object($r))
+                return $r->{$level} === $filter;
+
+            throw new \InvalidArgumentException('Invalid flat tree data. Levels must only be array or object<\stdclass>.');
+        });
         $tree[$filter][CONTAINS] = array_merge($tree[$filter][CONTAINS] ?? [], (__FUNCTION__)($filtered, $levels));
     }
 
@@ -76,6 +81,7 @@ function debug(array $tree, $template, int $ident = 0) : string {
 
     $buffer = '';
     foreach ($tree as $level => $subtree) {
+        $subtree = (array) $subtree;
         $subtree[':level'] = $level;
         if (isset($subtree[CONTAINS])) {
             $buffer .=  str_repeat('│  ', $ident) . '├─ ' . $view($subtree) . "\n";
